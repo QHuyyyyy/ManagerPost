@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Table, Button, Modal, Form, Input, Space, message } from 'antd';
 import { PlusCircle, Pencil, Trash2 } from 'lucide-react';
 import api from '../api';
@@ -91,20 +91,29 @@ const UserManagement = () => {
       title: 'No.',
       dataIndex: 'index',
       key: 'index',
-      width: '10%',
+      width: 80,
+      fixed: 'left',
       render: (text, record, index) => index + 1,
     },
     {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      width: '15%',
+      width: 150,
+      ellipsis: true,
+      render: (text) => (
+        <div className="whitespace-normal">{text}</div>
+      ),
     },
     {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
-      width: '20%',
+      width: 200,
+      ellipsis: true,
+      render: (text) => (
+        <div className="whitespace-normal">{text}</div>
+      ),
     },
     {
       title: 'Created Date',
