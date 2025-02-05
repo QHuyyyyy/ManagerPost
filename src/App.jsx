@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './routes/Login'
-import DashboardPage from './routes/dashboard/page';
+import DashboardPage from './routes/page';
 import PostManagement from './routes/PostList';
 import Layout from './routes/layout';
 import { ThemeProvider } from './contexts/theme-context';
 import { AuthContextProvider } from './AuthContext';
 
-import NewPost from "@/routes/newpost/NewPost";
-import  UserManagement from './routes/Userlist';
+import NewPost from './routes/newpost/NewPost';
+import UserManagement from './routes/Userlist';
 import NewUser from './routes/NewUser';
 
 const ProtectedRoute = ({ children }) => {

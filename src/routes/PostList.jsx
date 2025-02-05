@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Table, Button, Modal, Form, Input, Space, message, Switch } from 'antd';
-import { PlusCircle, Pencil, Trash2 } from 'lucide-react';
+import {  Pencil, Trash2 } from 'lucide-react';
 import api from '../api';
 import { Footer } from '@/layouts/footer';
 import dayjs from 'dayjs';

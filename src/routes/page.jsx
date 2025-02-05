@@ -1,18 +1,11 @@
-import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-
-import { useTheme } from "@/hooks/use-theme";
-
-import { overviewData, recentSalesData, topProducts } from "@/constants";
 
 import { Footer } from "@/layouts/footer";
-import { useState, useEffect, useRef } from "react";
-import { CreditCard, DollarSign, Package, PencilLine, Star, Trash, TrendingUp, Users } from "lucide-react";
-
+import { useState, useEffect } from "react";
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import { Avatar, Card } from 'antd';
 
 const { Meta } = Card;
-import { getPost } from "../../api";
+import { getPost } from "@/api";
 const DashboardPage = () => {
     const [postData, setPostData] = useState([]);
   const [loading, setLoading] = useState(true);

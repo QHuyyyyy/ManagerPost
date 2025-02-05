@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Table, Button, Modal, Form, Input, Space, message } from 'antd';
 import { PlusCircle, Pencil, Trash2 } from 'lucide-react';
 import api from '../api';
