@@ -1,12 +1,18 @@
-import { useState, useEffect } from "react";
-import { Avatar, Card, Button, Modal, Form, Input, Space, message, Switch, Dropdown, Menu } from "antd";
-import { EditOutlined, SettingOutlined } from "@ant-design/icons";
-import api, { getPost } from "../../api";
-import { Footer } from "@/layouts/footer";
-import axios from 'axios';
+import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
+import { useTheme } from "@/hooks/use-theme";
+
+import { overviewData, recentSalesData, topProducts } from "@/constants";
+
+import { Footer } from "@/layouts/footer";
+import { useState, useEffect, useRef } from "react";
+import { CreditCard, DollarSign, Package, PencilLine, Star, Trash, TrendingUp, Users } from "lucide-react";
+
+import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { Avatar, Card } from 'antd';
 
 const { Meta } = Card;
+import { getPost } from "../../api";    
 
 const updatePost = async (id, data) => {
     try {
@@ -38,7 +44,7 @@ const DashboardPage = () => {
         setLoading(false);
       }
     };
-
+    
     fetchPostData();
   }, []);
 
@@ -50,7 +56,7 @@ const DashboardPage = () => {
 
   const handleSubmit = async (values) => {
     try {
-        await updateData(editingPost.id, { ...editingPost, ...values });
+        await updatePost(editingPost.id, { ...editingPost, ...values });
       message.success("Post updated successfully");
       setModalVisible(false);
       form.resetFields();
@@ -94,7 +100,7 @@ const DashboardPage = () => {
     <div className="flex flex-col gap-y-4">
       <div className="grid md:grid-cols-1 grid-cols-1 place-items-center gap-2 mb-14">
         {postData.map((post) =>
-          post.status ? (
+          post.status===true||post.status==="active"||post.status==="Active" ? (
             <Card
               key={post.id}
               style={{ width: "60%" }}
