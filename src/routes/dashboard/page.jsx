@@ -18,21 +18,7 @@ const DashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const videoRef = useRef(null);
 
-  const handleFullscreen = () => {
-    if (videoRef.current) {
-      if (videoRef.current.requestFullscreen) {
-        videoRef.current.requestFullscreen();
-      } else if (videoRef.current.mozRequestFullScreen) { // Firefox
-        videoRef.current.mozRequestFullScreen();
-      } else if (videoRef.current.webkitRequestFullscreen) { // Chrome, Safari, Opera
-        videoRef.current.webkitRequestFullscreen();
-      } else if (videoRef.current.msRequestFullscreen) { // IE/Edge
-        videoRef.current.msRequestFullscreen();
-      }
-    }
-  };
   useEffect(() => {
     const fetchPostData = async () => {
       try {
@@ -58,7 +44,7 @@ const DashboardPage = () => {
         <div className="grid md:grid-cols-1 grid-cols-1 place-items-center gap-2 mb-14">
       {postData.map((post, index) => (
         
-        post.status==="Active"?(<Card
+        post.status===true||post.status==="active"||post.status==="Active"?(<Card
             key={post.id || index}
             style={{ width: "60%" }}
             
@@ -69,7 +55,7 @@ const DashboardPage = () => {
             ]}
           >
             <Meta
-              avatar={<Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />} // Example avatar
+              avatar={<Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />}
               title={post.title || "Untitled Post"}
               description={post.description|| "No description available"}
             />
@@ -80,7 +66,6 @@ const DashboardPage = () => {
               />
               {post.video && post.video.includes("youtube.com") || post.video.includes("youtu.be") ? (
           <iframe
-            ref={videoRef}
             width="100%"
             height="315"
             src={`https://www.youtube.com/embed/${post.video.split("v=")[1] || post.video.split("/").pop()}?enablejsapi=1`}
@@ -88,7 +73,6 @@ const DashboardPage = () => {
             frameBorder="0"
             allow="autoplay; encrypted-media; fullscreen"
             allowFullScreen
-            onClick={handleFullscreen}
             style={{ marginTop: "10px", borderRadius: "8px", cursor: "pointer" }}
           ></iframe>
         ) : null}
