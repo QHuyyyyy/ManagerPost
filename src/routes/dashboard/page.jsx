@@ -57,41 +57,43 @@ const DashboardPage = () => {
     <div className="flex flex-col gap-y-4">
         <div className="grid md:grid-cols-1 grid-cols-1 place-items-center gap-2 mb-14">
       {postData.map((post, index) => (
-        <Card
-          key={post.id || index}
-          style={{ width: "60%" }}
-          
-          actions={[
-            <SettingOutlined key="setting" />,
-            <EditOutlined key="edit" />,
+        
+        post.status==="Active"?(<Card
+            key={post.id || index}
+            style={{ width: "60%" }}
             
-          ]}
-        >
-          <Meta
-            avatar={<Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />} // Example avatar
-            title={post.title || "Untitled Post"}
-            description={post.description|| "No description available"}
-          />
-          <img
-              alt={post.title || "Post Image"}
-              src={post.image || "https://via.placeholder.com/300"}
-              style={{ width: "100%", marginTop: "10px" }}
+            actions={[
+              <SettingOutlined key="setting" />,
+              <EditOutlined key="edit" />,
+              
+            ]}
+          >
+            <Meta
+              avatar={<Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />} // Example avatar
+              title={post.title || "Untitled Post"}
+              description={post.description|| "No description available"}
             />
-            {post.video && post.video.includes("youtube.com") || post.video.includes("youtu.be") ? (
-        <iframe
-          ref={videoRef}
-          width="100%"
-          height="315"
-          src={`https://www.youtube.com/embed/${post.video.split("v=")[1] || post.video.split("/").pop()}?enablejsapi=1`}
-          title="YouTube video player"
-          frameBorder="0"
-          allow="autoplay; encrypted-media; fullscreen"
-          allowFullScreen
-          onClick={handleFullscreen} // Nhấp vào sẽ fullscreen
-          style={{ marginTop: "10px", borderRadius: "8px", cursor: "pointer" }}
-        ></iframe>
-      ) : null}
-        </Card>
+            <img
+                alt={post.title || "Post Image"}
+                src={post.image || "https://via.placeholder.com/300"}
+                style={{ width: "100%", marginTop: "10px" }}
+              />
+              {post.video && post.video.includes("youtube.com") || post.video.includes("youtu.be") ? (
+          <iframe
+            ref={videoRef}
+            width="100%"
+            height="315"
+            src={`https://www.youtube.com/embed/${post.video.split("v=")[1] || post.video.split("/").pop()}?enablejsapi=1`}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="autoplay; encrypted-media; fullscreen"
+            allowFullScreen
+            onClick={handleFullscreen}
+            style={{ marginTop: "10px", borderRadius: "8px", cursor: "pointer" }}
+          ></iframe>
+        ) : null}
+          </Card>):
+          null
       ))}
       </div>
       <Footer />
