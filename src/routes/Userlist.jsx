@@ -62,13 +62,21 @@ const UserManagement = () => {
 
   // Delete user
   const handleDelete = async (id) => {
-    try {
-      await api.delete(`/User/${id}`);
-      message.success('User deleted successfully');
-      fetchUsers();
-    } catch (error) {
-      message.error('Failed to delete user');
-    }
+    Modal.confirm({
+      title: 'Are you sure you want to delete this user?',
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk: async () => {
+        try {
+          await api.delete(`/User/${id}`);
+          message.success('User deleted successfully');
+          fetchUsers();
+        } catch (error) {
+          message.error('Failed to delete user');
+        }
+      },
+    });
   };
 
   // Open modal for editing
