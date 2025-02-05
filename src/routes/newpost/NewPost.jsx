@@ -8,18 +8,18 @@ const NewPost = () => {
     const navigate = useNavigate();
     const [form] = Form.useForm();
 
-    // Xử lý khi form được submit
+
     const onFinish = async (values) => {
         setLoading(true);
 
-        const currentTime = new Date().toISOString(); // Lấy thời gian hiện tại
+        const currentTime = new Date().toISOString();
 
         const newPost = {
             ...values,
-            userId: "64a8f8e2b9a1d9a7c0a5f1e3", // Đặt userId mặc định
+            userId: "64a8f8e2b9a1d9a7c0a5f1e3",
             createDate: currentTime,
             updateDate: currentTime,
-            status: values.status ? "Active" : "Inactive", // Chuyển đổi giá trị Switch thành text
+            status: values.status ? "Active" : "Inactive",
         };
 
         try {
@@ -43,7 +43,7 @@ const NewPost = () => {
                 initialValues={{
                     title: "",
                     description: "",
-                    status: true, // Mặc định là Active
+                    status: true,
                     image: "",
                     video: "",
                 }}
