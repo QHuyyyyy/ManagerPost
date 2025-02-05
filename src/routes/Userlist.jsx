@@ -4,6 +4,7 @@ import { PlusCircle, Pencil, Trash2 } from 'lucide-react';
 import api from '../api';
 import { Footer } from '@/layouts/footer';
 import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
@@ -11,6 +12,7 @@ const UserManagement = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   // Fetch users
   const fetchUsers = async () => {
@@ -60,13 +62,21 @@ const UserManagement = () => {
 
   // Delete user
   const handleDelete = async (id) => {
-    try {
-      await api.delete(`/User/${id}`);
-      message.success('User deleted successfully');
-      fetchUsers();
-    } catch (error) {
-      message.error('Failed to delete user');
-    }
+    Modal.confirm({
+      title: 'Are you sure you want to delete this user?',
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk: async () => {
+        try {
+          await api.delete(`/User/${id}`);
+          message.success('User deleted successfully');
+          fetchUsers();
+        } catch (error) {
+          message.error('Failed to delete user');
+        }
+      },
+    });
   };
 
   // Open modal for editing
@@ -78,10 +88,11 @@ const UserManagement = () => {
 
   const columns = [
     {
-      title: 'ID',
-      dataIndex: 'id',
-      key: 'id',
+      title: 'No.',
+      dataIndex: 'index',
+      key: 'index',
       width: '10%',
+      render: (text, record, index) => index + 1,
     },
     {
       title: 'Name',
@@ -140,6 +151,14 @@ const UserManagement = () => {
     <div className="flex h-full flex-col">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">User Management</h1>
+        <Button
+          type="primary"
+          className="flex items-center gap-2"
+          onClick={() => navigate('/users/new')}
+          icon={<PlusCircle size={16} />}
+        >
+          Add User
+        </Button>
       </div>
 
       <div className="flex-grow rounded-lg bg-white p-6 shadow-md dark:bg-slate-900">
