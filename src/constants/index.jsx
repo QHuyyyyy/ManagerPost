@@ -1,4 +1,4 @@
-import { ChartColumn, Home, NotepadText, Package, Settings, ShoppingBag, UserCheck, Users } from "lucide-react";
+import { ChartColumn, Home, NotepadText, Package, PackagePlus, Settings, ShoppingBag, UserCheck, Users } from "lucide-react";
 
 import ProfileImage from "@/assets/profile-image.jpg";
 import ProductImage from "@/assets/product-image.jpg";
