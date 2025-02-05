@@ -18,9 +18,9 @@ api.interceptors.response.use(
      return response;
     }, (error) => {
       // handle response un-authen error
-      // if (error.response.status === 401) {
-      //   navigate("/");
-      // }
+    //   if (error.response.status === 401) {
+    //     navigate("/");
+    //   }
       return Promise.reject(error);
     });
 
