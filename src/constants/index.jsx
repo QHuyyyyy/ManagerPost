@@ -34,7 +34,7 @@ export const navbarLinks = [
             },
             {
                 label: "New Post",
-                icon: NotepadText, // hoặc icon phù hợp khác
+                icon: PackagePlus,
                 path: "/newpost", 
             }
         ],
