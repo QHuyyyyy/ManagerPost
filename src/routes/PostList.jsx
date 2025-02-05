@@ -79,13 +79,6 @@ const PostManagement = () => {
     setModalVisible(true);
   };
 
-  // Add new post
-  const handleAdd = () => {
-    setEditingPost(null);
-    form.resetFields();
-    setModalVisible(true);
-  };
-
   const columns = [
     {
       title: 'ID',
@@ -188,14 +181,6 @@ const PostManagement = () => {
     <div className="flex h-full flex-col">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Post Management</h1>
-        <Button
-          type="primary"
-          onClick={handleAdd}
-          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700"
-          icon={<PlusCircle size={16} />}
-        >
-          Add New Post
-        </Button>
       </div>
 
       <div className="flex-grow rounded-lg bg-white p-6 shadow-md dark:bg-slate-900">
