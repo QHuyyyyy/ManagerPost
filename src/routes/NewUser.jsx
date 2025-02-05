@@ -10,7 +10,7 @@ const NewUser = () => {
   const handleSubmit = async (values) => {
     try {
       const currentTime = Date.now();
-      const userData = {
+      const { confirmPassword, ...userData } = {
         ...values,
         createDate: currentTime,
         updateDate: currentTime
@@ -35,15 +35,16 @@ const NewUser = () => {
           form={form}
           layout="vertical"
           onFinish={handleSubmit}
-          className="max-w-lg mx-auto"
+          className="max-w-lg mx-auto text-slate-900 dark:text-white"
         >
           <Form.Item
             name="name"
             label={<span className="text-slate-700 dark:text-slate-200">Name</span>}
             rules={[{ required: true, message: 'Please input the name!' }]}
+            className="dark:text-white"
           >
             <Input 
-              className="h-10 dark:bg-slate-700 dark:text-white dark:border-slate-600" 
+              className="h-10 bg-white dark:bg-slate-700 text-slate-900 dark:text-white dark:border-slate-600 dark:placeholder-slate-400" 
               placeholder="Enter your name"
             />
           </Form.Item>
@@ -55,9 +56,10 @@ const NewUser = () => {
               { required: true, message: 'Please input the email!' },
               { type: 'email', message: 'Please enter a valid email!' }
             ]}
+            className="dark:text-white"
           >
             <Input 
-              className="h-10 dark:bg-slate-700 dark:text-white dark:border-slate-600"
+              className="h-10 bg-white dark:bg-slate-700 text-slate-900 dark:text-white dark:border-slate-600 dark:placeholder-slate-400"
               placeholder="Enter your email"
             />
           </Form.Item>
@@ -66,10 +68,34 @@ const NewUser = () => {
             name="password"
             label={<span className="text-slate-700 dark:text-slate-200">Password</span>}
             rules={[{ required: true, message: 'Please input the password!' }]}
+            className="dark:text-white"
           >
             <Input.Password 
-              className="h-10 dark:bg-slate-700 dark:text-white dark:border-slate-600"
+              className="h-10 bg-white dark:bg-slate-700 text-slate-900 dark:text-white dark:border-slate-600 dark:placeholder-slate-400"
               placeholder="Enter your password"
+            />
+          </Form.Item>
+
+          <Form.Item
+            name="confirmPassword"
+            label={<span className="text-slate-700 dark:text-slate-200">Confirm Password</span>}
+            dependencies={['password']}
+            rules={[
+              { required: true, message: 'Please confirm your password!' },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error('The two passwords do not match!'));
+                },
+              }),
+            ]}
+            className="dark:text-white"
+          >
+            <Input.Password 
+              className="h-10 bg-white dark:bg-slate-700 text-slate-900 dark:text-white dark:border-slate-600 dark:placeholder-slate-400"
+              placeholder="Confirm your password"
             />
           </Form.Item>
 
@@ -81,11 +107,7 @@ const NewUser = () => {
               >
                 Cancel
               </Button>
-              <Button 
-                type="primary" 
-                htmlType="submit"
-                className="min-w-[100px] h-10"
-              >
+              <Button type="primary" htmlType="submit">
                 Create User
               </Button>
             </div>
