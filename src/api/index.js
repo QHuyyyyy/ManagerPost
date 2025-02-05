@@ -5,46 +5,46 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-    // handle before request is sent
-    return config;
-  }, (error) => {
-    // handle request error
-    return Promise.reject(error);
-  });
+  // handle before request is sent
+  return config;
+}, (error) => {
+  // handle request error
+  return Promise.reject(error);
+});
 
 api.interceptors.response.use(
   (response) => {
-     // handle response data
-     return response;
-    }, (error) => {
-      // handle response un-authen error
-      // if (error.response.status === 401) {
-      //   navigate("/");
-      // }
-      return Promise.reject(error);
-    });
+    // handle response data
+    return response;
+  }, (error) => {
+    // handle response un-authen error
+    // if (error.response.status === 401) {
+    //   navigate("/");
+    // }
+    return Promise.reject(error);
+  });
 
-    export const getUsers = async () => {
-      try {
-        const response = await api.get('/User');
-        console.log(response.data)
-        return response.data;
-      } 
-      catch (error) {
-        console.error(error);
-        throw error;
-      }
-    };
+export const getUsers = async () => {
+  try {
+    const response = await api.get('/User');
+    console.log(response.data)
+    return response.data;
+  }
+  catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
 
-    export const getPost =  async () => {
-      try{
-        const response = await api.get('/Post')
-        console.log(response.data)
-        return response.data
-      }
-      catch(error){
-        console.error(error);
-        throw error;
-      }
-    }
+export const getPost = async () => {
+  try {
+    const response = await api.get('/Post')
+    console.log(response.data)
+    return response.data
+  }
+  catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
 export default api;
