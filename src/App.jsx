@@ -4,7 +4,7 @@ import { ThemeProvider } from "@/contexts/theme-context";
 
 import Layout from "@/routes/layout";
 import DashboardPage from "@/routes/dashboard/page";
-
+import NewPost from "@/routes/newpost/NewPost";
 function App() {
     const router = createBrowserRouter([
         {
@@ -60,8 +60,8 @@ function App() {
                     element: <h1 className="title">Post List</h1>,
                 },
                 {
-                    path: "new-post",
-                    element: <h1 className="title">New Post</h1>,
+                    path: "new-post", // Thêm route cho trang NewPost
+                    element: <NewPost />, // Chỉ định trang NewPost là trang được render khi người dùng truy cập vào "/new-post"
                 },
             ],
         },
