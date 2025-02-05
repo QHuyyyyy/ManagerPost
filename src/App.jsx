@@ -60,9 +60,10 @@ function App() {
                     element: <h1 className="title">Post List</h1>,
                 },
                 {
-                    path: "new-post", // Thêm route cho trang NewPost
-                    element: <NewPost />, // Chỉ định trang NewPost là trang được render khi người dùng truy cập vào "/new-post"
-                },
+                    path: "new-post",
+                    element: <NewPost />,
+                }
+
             ],
         },
     ]);
