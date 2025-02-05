@@ -5,7 +5,7 @@ import PostManagement from './routes/PostList';
 import Layout from './routes/layout';
 import { ThemeProvider } from './contexts/theme-context';
 import { AuthContextProvider } from './AuthContext';
-
+import  UserManagement from './routes/Userlist';
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('token');
   if (!token) {
@@ -27,7 +27,9 @@ function App() {
               </ProtectedRoute>
             }>
               <Route index element={<DashboardPage />} />
+
               <Route path="posts" element={<PostManagement />} />
+              <Route path="users" element={<UserManagement />} />
             </Route>
           </Routes>
         </BrowserRouter>
