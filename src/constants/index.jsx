@@ -32,6 +32,11 @@ export const navbarLinks = [
                 icon: NotepadText,
                 path: "/posts",
             },
+            {
+                label: "New Post",
+                icon: NotepadText, // hoặc icon phù hợp khác
+                path: "/newpost", 
+            }
         ],
     },
 ];
