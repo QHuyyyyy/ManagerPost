@@ -7,6 +7,7 @@ import { ThemeProvider } from './contexts/theme-context';
 import { AuthContextProvider } from './AuthContext';
 
 import NewPost from "@/routes/newpost/NewPost";
+import  UserManagement from './routes/Userlist';
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('token');
   if (!token) {
@@ -30,6 +31,9 @@ function App() {
               <Route index element={<DashboardPage />} />
               <Route path="/posts" element={<PostManagement />} />
               <Route path='/newpost' element={<NewPost/>}/>
+
+              <Route path="posts" element={<PostManagement />} />
+              <Route path="users" element={<UserManagement />} />
             </Route>
           </Routes>
         </BrowserRouter>
