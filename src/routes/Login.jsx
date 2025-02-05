@@ -28,7 +28,7 @@ const Login = () => {
         <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8 space-y-8">
           <div className="text-center space-y-2">
             <Title level={2} className="!text-slate-900 dark:!text-white !m-0">
-              Welcome Back
+              Welcome 
             </Title>
             <p className="text-slate-600 dark:text-slate-400">
               Sign in to continue to your account
