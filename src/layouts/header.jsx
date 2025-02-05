@@ -1,4 +1,8 @@
 import { useTheme } from "@/hooks/use-theme";
+import { Dropdown } from 'antd';
+import { UserAuth } from '../AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { message } from 'antd';
 
 import { Bell, ChevronsLeft, Moon, Search, Sun } from "lucide-react";
 
@@ -8,6 +12,26 @@ import PropTypes from "prop-types";
 
 export const Header = ({ collapsed, setCollapsed }) => {
     const { theme, setTheme } = useTheme();
+    const { logOut } = UserAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = async () => {
+        try {
+            await logOut();
+            message.success('Log out successfully!');
+            navigate('/');
+        } catch (error) {
+            message.error('Log out failed: ' + error.message);
+        }
+    };
+
+    const items = [
+        {
+            key: 'logout',
+            label: 'Log Out',
+            onClick: handleLogout,
+        },
+    ];
 
     return (
         <header className="relative z-10 flex h-[60px] items-center justify-between bg-white px-4 shadow-md transition-colors dark:bg-slate-900">
@@ -49,13 +73,15 @@ export const Header = ({ collapsed, setCollapsed }) => {
                 <button className="btn-ghost size-10">
                     <Bell size={20} />
                 </button>
-                <button className="size-10 overflow-hidden rounded-full">
-                    <img
-                        src={profileImg}
-                        alt="profile image"
-                        className="size-full object-cover"
-                    />
-                </button>
+                <Dropdown menu={{ items }} placement="bottomRight">
+                    <button className="size-10 overflow-hidden rounded-full">
+                        <img
+                            src={profileImg}
+                            alt="profile image"
+                            className="size-full object-cover"
+                        />
+                    </button>
+                </Dropdown>
             </div>
         </header>
     );
