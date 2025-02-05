@@ -22,8 +22,8 @@ const PostManagement = () => {
     } catch (error) {
       console.error('Error details:', error);
       message.error(
-        error.response?.data?.message || 
-        error.message || 
+        error.response?.data?.message ||
+        error.message ||
         'Failed to fetch posts'
       );
     } finally {
@@ -109,9 +109,8 @@ const PostManagement = () => {
       key: 'status',
       width: '8%',
       render: (status) => (
-        <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${
-          status ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-        }`}>
+        <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${status ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+          }`}>
           {status ? 'Active' : 'Inactive'}
         </span>
       ),
@@ -156,7 +155,7 @@ const PostManagement = () => {
       width: '8%',
       render: (_, record) => (
         <Space>
-          <Button 
+          <Button
             type="text"
             className="flex items-center text-blue-600 hover:text-blue-800"
             onClick={() => handleEdit(record)}
@@ -228,8 +227,8 @@ const PostManagement = () => {
             label="Description"
             rules={[{ required: true, message: 'Please input the description!' }]}
           >
-            <Input.TextArea 
-              rows={4} 
+            <Input.TextArea
+              rows={4}
               className="dark:bg-slate-800 dark:text-slate-200"
             />
           </Form.Item>
