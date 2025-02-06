@@ -4,7 +4,7 @@ import { UserAuth } from '../AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 
-import { Bell, ChevronsLeft, Moon, Search, Sun } from "lucide-react";
+import { BellOutlined, LeftOutlined, SunOutlined, MoonOutlined } from '@ant-design/icons';
 
 import profileImg from "@/assets/profile-image.jpg";
 
@@ -42,7 +42,7 @@ export const Header = ({ collapsed, setCollapsed }) => {
                     className="btn-ghost size-10"
                     onClick={() => setCollapsed(!collapsed)}
                 >
-                    <ChevronsLeft className={collapsed && "rotate-180"} />
+                    <LeftOutlined className={collapsed && "rotate-180"} />
                 </button>
             </div>
             <div className="flex items-center gap-x-3">
@@ -50,17 +50,17 @@ export const Header = ({ collapsed, setCollapsed }) => {
                     className="btn-ghost size-10"
                     onClick={() => setTheme(theme === "light" ? "dark" : "light")}
                 >
-                    <Sun
+                    <SunOutlined
                         size={20}
                         className="dark:hidden"
                     />
-                    <Moon
+                    <MoonOutlined
                         size={20}
                         className="hidden dark:block"
                     />
                 </button>
                 <button className="btn-ghost size-10">
-                    <Bell size={20} />
+                    <BellOutlined size={20} />
                 </button>
                 <div className="flex items-center gap-2">
                     <span className="text-sm font-medium text-slate-900 dark:text-white">
