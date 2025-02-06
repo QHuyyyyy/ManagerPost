@@ -14,15 +14,15 @@ api.interceptors.request.use((config) => {
 
 api.interceptors.response.use(
   (response) => {
-    // handle response data
-    return response;
-  }, (error) => {
-    // handle response un-authen error
-    // if (error.response.status === 401) {
-    //   navigate("/");
-    // }
-    return Promise.reject(error);
-  });
+     // handle response data
+     return response;
+    }, (error) => {
+      // handle response un-authen error
+    //   if (error.response.status === 401) {
+    //     navigate("/");
+    //   }
+      return Promise.reject(error);
+    });
 
 export const getUsers = async () => {
   try {

@@ -62,14 +62,23 @@ const PostManagement = () => {
   };
 
   // Delete post
-  const handleDelete = async (id) => {
-    try {
-      await api.delete(`/Post/${id}`);
-      message.success('Post deleted successfully');
-      fetchPosts();
-    } catch (error) {
-      message.error('Failed to delete post');
-    }
+  const handleDelete = (id) => {
+    Modal.confirm({
+      title: 'Are you sure you want to delete this post?',
+      content: 'This action cannot be undone.',
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk: async () => {
+        try {
+          await api.delete(`/Post/${id}`);
+          message.success('Post deleted successfully');
+          fetchPosts();
+        } catch (error) {
+          message.error('Failed to delete post: ' + error.message);
+        }
+      },
+    });
   };
 
   // Open modal for editing
@@ -87,10 +96,26 @@ const PostManagement = () => {
       width: '5%',
     },
     {
+      title: 'UserId',
+      dataIndex: 'userId',
+      key: 'userId',
+      width: '5%',
+      render: (userId) => (
+        <div title={userId}>
+          {userId.length > 8 ? `${userId.slice(0, 8)}...` : userId}
+        </div>
+      ),
+    },
+    {
       title: 'Title',
       dataIndex: 'title',
       key: 'title',
       width: '15%',
+      render: (text) => (
+        <div className="whitespace-normal break-words">
+          {text}
+        </div>
+      ),
     },
     {
       title: 'Description',
@@ -98,7 +123,7 @@ const PostManagement = () => {
       key: 'description',
       width: '20%',
       render: (text) => (
-        <div className="max-w-md overflow-hidden text-ellipsis whitespace-nowrap">
+        <div className="whitespace-normal break-words line-clamp-3">
           {text}
         </div>
       ),
@@ -121,7 +146,7 @@ const PostManagement = () => {
       key: 'image',
       width: '10%',
       render: (image) => (
-        <img src={image} alt="Post" className="h-16 w-16 rounded-lg object-cover" />
+        <img src={image} alt="Image" className="h-16 w-16 rounded-lg object-cover" />
       ),
     },
     {
@@ -159,7 +184,6 @@ const PostManagement = () => {
             type="text"
             className="flex items-center text-blue-600 hover:text-blue-800"
             onClick={() => handleEdit(record)}
-            icon={<Pencil size={16} />}
           >
             Edit
           </Button>
@@ -167,7 +191,6 @@ const PostManagement = () => {
             type="text"
             className="flex items-center text-red-600 hover:text-red-800"
             onClick={() => handleDelete(record.id)}
-            icon={<Trash2 size={16} />}
           >
             Delete
           </Button>
