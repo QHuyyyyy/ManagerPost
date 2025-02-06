@@ -2,25 +2,35 @@ import React, { useState } from "react";
 import { Form, Input, Button, message, Switch, Card } from "antd";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
+import { UserAuth } from "../AuthContext";
+import { getUserByEmail } from "../api";
 
 const NewPost = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [form] = Form.useForm();
+    const { user } = UserAuth();
 
     const onFinish = async (values) => {
         setLoading(true);
         const currentTime = new Date().toISOString();
 
-        const newPost = {
-            ...values,
-            userId: "64a8f8e2b9a1d9a7c0a5f1e3",
-            createDate: currentTime,
-            updateDate: currentTime,
-            status: values.status ? "Active" : "Inactive",
-        };
-
         try {
+            const mockApiUser = await getUserByEmail(user.email);
+            
+            if (!mockApiUser) {
+                message.error("User not found in system");
+                return;
+            }
+
+            const newPost = {
+                ...values,
+                userId: mockApiUser.id,
+                createDate: currentTime,
+                updateDate: currentTime,
+                status: values.status ? "Active" : "Inactive",
+            };
+
             await api.post("/Post", newPost);
             message.success("Post created successfully!");
             navigate("/posts");

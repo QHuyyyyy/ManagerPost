@@ -47,4 +47,15 @@ export const getPost = async () => {
     throw error;
   }
 }
+
+export const getUserByEmail = async (email) => {
+  try {
+    const response = await api.get(`/User?email=${email}`);
+    return response.data[0]; // Trả về user đầu tiên match với email
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export default api;
