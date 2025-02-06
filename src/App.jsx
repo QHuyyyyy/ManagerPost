@@ -6,7 +6,7 @@ import Layout from './routes/layout';
 import { ThemeProvider } from './contexts/theme-context';
 import { AuthContextProvider } from './AuthContext';
 
-import NewPost from './routes/newpost/NewPost';
+import NewPost from './routes/NewPost';
 import UserManagement from './routes/Userlist';
 import NewUser from './routes/NewUser';
 

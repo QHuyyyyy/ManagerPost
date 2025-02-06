@@ -1,4 +1,4 @@
-import { ChartColumn, Home, NotepadText, Package, PackagePlus, Settings, ShoppingBag, UserCheck, UserPlus, Users } from "lucide-react";
+import { HomeOutlined, UserOutlined, FileTextOutlined, PlusOutlined } from '@ant-design/icons';
 
 import ProfileImage from "@/assets/profile-image.jpg";
 import ProductImage from "@/assets/product-image.jpg";
@@ -9,7 +9,7 @@ export const navbarLinks = [
         links: [
             {
                 label: "Dashboard",
-                icon: Home,
+                icon: HomeOutlined,
                 path: "/",
             },
         ],
@@ -19,7 +19,7 @@ export const navbarLinks = [
         links: [
             {
                 label: "User List",
-                icon: Users,
+                icon: UserOutlined,
                 path: "/users",
             },
         ],
@@ -29,12 +29,12 @@ export const navbarLinks = [
         links: [
             {
                 label: "Post List",
-                icon: NotepadText,
+                icon: FileTextOutlined,
                 path: "/posts",
             },
             {
                 label: "New Post",
-                icon: PackagePlus,
+                icon: PlusOutlined,
                 path: "/newpost",
             },
         ],
