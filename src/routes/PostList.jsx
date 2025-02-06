@@ -3,14 +3,15 @@ import { Table, Button, Modal, Form, Input, Space, message, Switch } from 'antd'
 import api from '../api';
 import { Footer } from '@/layouts/footer';
 import dayjs from 'dayjs';
-
+import { getUserByEmail } from "../api";
+import { UserAuth } from '../AuthContext';
 const PostManagement = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [editingPost, setEditingPost] = useState(null);
   const [form] = Form.useForm();
-
+  const { user } = UserAuth();
   // Fetch posts
   const fetchPosts = async () => {
     try {
@@ -38,9 +39,16 @@ const PostManagement = () => {
   const handleSubmit = async (values) => {
     try {
       const currentTime = Date.now();
+      const mockApiUser = await getUserByEmail(user.email);
+      
+      if (!mockApiUser) {
+        message.error("User not found in system");
+        return;
+      }
+
       const postData = {
         ...values,
-        userId: "64a8f8e2b9a1d9a7c0a5f1e3",
+        userId: mockApiUser.id,
         createDate: editingPost ? editingPost.createDate : currentTime,
         updateDate: currentTime
       };
