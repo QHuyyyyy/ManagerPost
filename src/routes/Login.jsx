@@ -13,12 +13,20 @@ const Login = () => {
     try {
       const result = await googleSignIn();
       if (result.user) {
+        // Kiểm tra email trong mockapi
+        const mockApiUser = await getUserByEmail(result.user.email);
+        
+        if (!mockApiUser) {
+          message.error('Email không tồn tại trong hệ thống!');
+          return;
+        }
+
         localStorage.setItem('token', result.token);
         message.success('Login successfully!');
         navigate('/');
-      }
+      }   
     } catch (error) {
-      message.error('Login failed: ' + error.message);
+      message.error('Login failed');
     }
   };
 
