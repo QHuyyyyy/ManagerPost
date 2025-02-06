@@ -40,7 +40,7 @@ const PostManagement = () => {
     try {
       const currentTime = Date.now();
       const mockApiUser = await getUserByEmail(user.email);
-      
+      console.log(user.email)
       if (!mockApiUser) {
         message.error("User not found in system");
         return;

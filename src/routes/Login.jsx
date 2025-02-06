@@ -3,6 +3,7 @@ import { GoogleOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../AuthContext';
 
+import { getUserByEmail } from '../api';
 const { Title } = Typography;
 
 const Login = () => {
@@ -26,7 +27,7 @@ const Login = () => {
         navigate('/');
       }   
     } catch (error) {
-      message.error('Login failed');
+      message.error('Login failed' + error.message);
     }
   };
 
