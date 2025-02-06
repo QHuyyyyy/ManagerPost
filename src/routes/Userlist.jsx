@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Table, Button, Modal, Form, Input, Space, message } from 'antd';
-import { PlusCircle, Pencil, Trash2 } from 'lucide-react';
 import api from '../api';
 import { Footer } from '@/layouts/footer';
 import dayjs from 'dayjs';
@@ -139,7 +138,6 @@ const UserManagement = () => {
             type="text"
             className="flex items-center text-blue-600 hover:text-blue-800"
             onClick={() => handleEdit(record)}
-            icon={<Pencil size={16} />}
           >
             Edit
           </Button>
@@ -147,7 +145,6 @@ const UserManagement = () => {
             type="text"
             className="flex items-center text-red-600 hover:text-red-800"
             onClick={() => handleDelete(record.id)}
-            icon={<Trash2 size={16} />}
           >
             Delete
           </Button>
@@ -164,7 +161,6 @@ const UserManagement = () => {
           type="primary"
           className="flex items-center gap-2"
           onClick={() => navigate('/users/new')}
-          icon={<PlusCircle size={16} />}
         >
           Add User
         </Button>
