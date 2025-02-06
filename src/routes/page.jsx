@@ -1,4 +1,3 @@
-import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 import { useTheme } from "@/hooks/use-theme";
 
