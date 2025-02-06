@@ -33,19 +33,18 @@ const DashboardPage = () => {
   const [editingPost, setEditingPost] = useState(null);
   const [form] = Form.useForm();
 
+  const fetchPostData = async () => {
+    try {
+      const data = await getPost();
+      setPostData(data);
+    } catch (err) {
+      setError(err.message || "Failed to fetch posts");
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchPostData = async () => {
-      try {
-        const data = await getPost();
-        setPostData(data);
-      } catch (err) {
-        setError(err.message || "Failed to fetch posts");
-      } finally {
-        setLoading(false);
-      }
-    };
-    
-    fetchPostData();
+     fetchPostData();
   }, []);
 
   const handleEdit = (post) => {
@@ -98,7 +97,7 @@ const DashboardPage = () => {
 
   return (
     <div className="flex flex-col gap-y-4">
-      <div className="grid md:grid-cols-1 grid-cols-1 place-items-center gap-2 mb-14">
+      <div className="grid md:grid-cols-1 grid-cols-1 place-items-center gap-6 mb-14">  
         {postData.map((post) =>
           post.status===true||post.status==="active"||post.status==="Active" ? (
             <Card
